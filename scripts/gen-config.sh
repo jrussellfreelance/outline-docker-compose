@@ -30,7 +30,7 @@ else
   app_url=$1
   echo "! Instance URL: $app_url"
 fi
-# after app_url is set, determine network and container names
+# after app_url is set, determine network name
 network_name="$(echo $app_url | sed "s|https://||g" | sed "s|http://||g" | sed "s|:|_|g" | sed "s|\.||g")_net"
 echo "! Network name: $network_name"
 
