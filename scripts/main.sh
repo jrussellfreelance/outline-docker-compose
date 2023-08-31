@@ -75,7 +75,8 @@ function create_outline_env_file {
 
     env_replace AWS_ACCESS_KEY_ID $MINIO_ACCESS_KEY $env_file
     env_replace AWS_SECRET_ACCESS_KEY $MINIO_SECRET_KEY $env_file
-    env_replace AWS_S3_UPLOAD_BUCKET_URL $URL $env_file
+    env_replace AWS_S3_UPLOAD_BUCKET_URL $MINIO_URL $env_file
+    env_replace AWS_S3_UPLOAD_BUCKET_NAME $MINIO_BUCKET $env_file
 
     env_add PGSSLMODE disable $env_file
     env_add ALLOWED_DOMAINS "$ALLOWED_DOMAINS" $env_file

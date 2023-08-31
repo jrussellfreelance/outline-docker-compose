@@ -1,13 +1,13 @@
 #!/bin/bash
 ## Tested on Ubuntu and similar flavors
 ## This script generates config.sh for deploying Outline
-
-echo "! gen-config.sh started ---"
+echo "! gen-config.sh started"
+echo "---"
 
 usage()
 { # print usage
   echo '> generates Outline Wiki config values'
-  echo '$ ./gen-config.sh <app URL> <host port>'
+  echo '$ ./gen-config.sh <app URL> <host port> <minio URL> <minio bucket>'
 }
 
 # argument variables
@@ -38,11 +38,33 @@ echo "! Network name: $network_name"
 if [ -z "$2" ]; then
   while [[ -z "$hostport" ]]
   do
-    read -p "> Host port: " hostport
+    read -p "> Host port (e.g. 4427): " hostport
   done
 else
   hostport=$2
   echo "! Host port: $hostport"
+fi
+
+# assign $minio_url to $3 or prompt for minio url
+if [ -z "$3" ]; then
+  while [[ -z "$minio_url" ]]
+  do
+    read -p "> Minio URL (e.g. https://obj.data.com): " minio_url
+  done
+else
+  minio_url=$3
+  echo "! Minio URL: $minio_url"
+fi
+
+# assign $minio_bucket to $4 or prompt for bucket name
+if [ -z "$4" ]; then
+  while [[ -z "$minio_bucket" ]]
+  do
+    read -p "> Minio bucket (e.g objdatabucket): " minio_bucket
+  done
+else
+  minio_bucket=$4
+  echo "! Minio bucket: $minio_bucket"
 fi
 
 # ask to configure email delivery
@@ -119,9 +141,13 @@ sed -i "s|OUTLINE_VERSION=|OUTLINE_VERSION=${outline_v}|g" scripts/config.sh
 sed -i "s|POSTGRES_VERSION=|POSTGRES_VERSION=${postgres_v}|g" scripts/config.sh
 sed -i "s|MINIO_VERSION=|MINIO_VERSION=${minio_v}|g" scripts/config.sh
 sed -i "s|MINIO_MC_VERSION=|MINIO_MC_VERSION=${minio_mc_v}|g" scripts/config.sh
+# minio
+sed -i "s|MINIO_URL=|MINIO_MC_VERSION=${minio_url}|g" scripts/config.sh
+sed -i "s|MINIO_BUCKET=|MINIO_BUCKET=${minio_bucket}|g" scripts/config.sh
 # timezone
 sed -i "s|TIME_ZONE=UTC|TIME_ZONE=${timezone}|g" scripts/config.sh
 
+echo "---"
 echo "! to review the configuration:"
 echo "less scripts/config.sh"
-echo "! gen-config.sh complete ---"
+echo "! gen-config.sh finished"
