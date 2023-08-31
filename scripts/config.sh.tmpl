@@ -1,0 +1,55 @@
+#!/bin/bash
+## Tested on Ubuntu and similar flavors
+## This script configures variables used to deploy Outline
+echo "! config.sh executed ---"
+
+# The url used to vist this web site.
+URL=
+# The default interface language. See translate.getoutline.com for a list of
+# available language codes and their rough percentage translated.
+DEFAULT_LANGUAGE=en_US
+# https://docs.djangoproject.com/en/2.2/ref/settings/#language-code
+LANGUAGE_CODE=en-us
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+TIME_ZONE=UTC
+FORCE_HTTPS=false
+
+# Comma separated list of domains to be allowed (optional).
+# If not set, the first user's domain is allowed by default.
+ALLOWED_DOMAINS=
+
+# Docker image version
+OUTLINE_VERSION=
+POSTGRES_VERSION=
+MINIO_VERSION=
+MINIO_MC_VERSION=
+
+# Email
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USERNAME=
+SMTP_PASSWORD=
+SMTP_FROM_EMAIL=
+SMTP_REPLY_EMAIL=
+
+# Nginx
+# The nginx bind ip and port.
+# If you use ip address to access outline, this ip and port should be same as the URL.
+# If this server behind a proxy(nginx), you can bind to `127.0.0.1`.
+HTTP_IP=127.0.0.1
+HTTP_PORT_IP=8888
+
+# Docker
+# If you server behind a proxy(nginx), and the proxy created by docker. You can use the proxy's network. Set the `NETWORKS` to proxy's network name, and set `NETWORKS_EXTERNAL` to `true` .
+# The sample config for host nginx can be find in `config/sample/nginx_outline.conf`.
+NETWORKS=
+NETWORKS_EXTERNAL=false
+
+# Secret keys, update by script.
+# You shouldn't edit it.
+MINIO_ACCESS_KEY=
+MINIO_SECRET_KEY=
+OIDC_CLIENT_SECRET=
+OUTLINE_SECRET_KEY=
+OUTLINE_UTILS_SECRET=
+DJANGO_SECRET_KEY=

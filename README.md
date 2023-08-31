@@ -15,8 +15,7 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
     ```
     git clone https://github.com/vicalloy/outline-docker-compose.git
     cd outline-docker-compose
-    cp scripts/config.sh.sample scripts/config.sh
-    # update config file: vim scripts/config.sh
+    bash scripts/gen-config.sh
     make install  # Create a docker-compose config file and start it. Initializing the oidc-server(add oidc client for outline and create a superuser).
     ```
 1. Open `http://127.0.0.1:8888` and login to outline.
