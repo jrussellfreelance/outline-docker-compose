@@ -4,8 +4,9 @@
 . ./utils.sh
 
 # update config file
-MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-`openssl rand -hex 8`}
-MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-`openssl rand -hex 32`}
+# minio keys are not prompted for by scripts/gen-config.sh
+#MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-`openssl rand -hex 8`}
+#MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-`openssl rand -hex 32`}
 OIDC_CLIENT_SECRET=${MINIO_SECRET_KEY:-`openssl rand -hex 28`}
 OUTLINE_SECRET_KEY=${OUTLINE_SECRET_KEY:-`openssl rand -hex 32`}
 OUTLINE_UTILS_SECRET=${OUTLINE_UTILS_SECRET:-`openssl rand -hex 32`}

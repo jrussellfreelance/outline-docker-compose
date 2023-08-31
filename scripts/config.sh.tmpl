@@ -1,7 +1,6 @@
 #!/bin/bash
 ## Tested on Ubuntu and similar flavors
 ## This script configures variables used to deploy Outline
-echo "! config.sh executed ---"
 
 # The url used to vist this web site.
 URL=
@@ -50,11 +49,11 @@ NETWORKS_EXTERNAL=false
 # Set these values according to your needs
 MINIO_URL=
 MINIO_BUCKET=
+MINIO_ACCESS_KEY=
+MINIO_SECRET_KEY=
 
 # Secret keys, update by script.
 # You shouldn't edit it.
-MINIO_ACCESS_KEY=
-MINIO_SECRET_KEY=
 OIDC_CLIENT_SECRET=
 OUTLINE_SECRET_KEY=
 OUTLINE_UTILS_SECRET=

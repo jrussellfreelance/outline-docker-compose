@@ -13,6 +13,10 @@ usage()
 # argument variables
 app_url=
 hostport=
+minio_url=
+minio_bucket=
+minio_accesskey=
+minio_secretkey=
 
 # -h or --help displays usage message
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -65,6 +69,28 @@ if [ -z "$4" ]; then
 else
   minio_bucket=$4
   echo "! Minio bucket: $minio_bucket"
+fi
+
+# if $MINIO_ACCESS_KEY is not set, prompt for minio access key
+if [ -z "$MINIO_ACCESS_KEY" ]; then
+  while [[ -z "$minio_accesskey" ]]
+  do
+    read -p "> minio access key: " minio_accesskey
+  done
+else
+  minio_accesskey=$MINIO_ACCESS_KEY
+  echo "! minio access key: $minio_accesskey"
+fi
+
+# if $MINIO_SECRET_KEY is not set, prompt for minio secret key
+if [ -z "$MINIO_SECRET_KEY" ]; then
+  while [[ -z "$minio_secretkey" ]]
+  do
+    read -p "> minio secret key: " minio_secretkey
+  done
+else
+  minio_secretkey=$MINIO_SECRET_KEY
+  echo "! minio secret key: $minio_secretkey"
 fi
 
 # ask to configure email delivery
@@ -144,6 +170,8 @@ sed -i "s|MINIO_MC_VERSION=|MINIO_MC_VERSION=${minio_mc_v}|g" scripts/config.sh
 # minio
 sed -i "s|MINIO_URL=|MINIO_MC_VERSION=${minio_url}|g" scripts/config.sh
 sed -i "s|MINIO_BUCKET=|MINIO_BUCKET=${minio_bucket}|g" scripts/config.sh
+sed -i "s|MINIO_ACCESS_KEY=|MINIO_ACCESS_KEY=${minio_accesskey}|g" scripts/config.sh
+sed -i "s|MINIO_SECRET_KEY=|MINIO_SECRET_KEY=${minio_secretkey}|g" scripts/config.sh
 # timezone
 sed -i "s|TIME_ZONE=UTC|TIME_ZONE=${timezone}|g" scripts/config.sh
 
